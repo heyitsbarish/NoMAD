@@ -138,26 +138,35 @@ class NoMADMenuController: NSObject, LoginWindowDelegate, PasswordChangeDelegate
         
         // set up Icons - we need 2 sets of 2 for light and dark modes
         
+        // Custom icons loaded from disk are marked as template images so the
+        // menu bar renders their shape in the appropriate color for the current
+        // appearance (and inverts correctly while the menu is open). Drawing
+        // them literally leaves them invisible against the menu bar.
+
         if defaults.string(forKey: Preferences.iconOn) != nil {
             myIconOn = NSImage.init(contentsOfFile: defaults.string(forKey: Preferences.iconOn)!)!
+            myIconOn.isTemplate = true
         } else {
             myIconOn = NSImage(named: "NoMAD-statusicon-on-on")!
         }
-        
+
         if defaults.string(forKey: Preferences.iconOff) != nil {
             myIconOff = NSImage.init(contentsOfFile: defaults.string(forKey: Preferences.iconOff)!)!
+            myIconOff.isTemplate = true
         } else {
             myIconOff = NSImage(named: "NoMAD-statusicon-off-off")!
         }
-        
+
         if defaults.string(forKey: Preferences.iconOnDark) != nil {
             myIconOnDark = NSImage.init(contentsOfFile: defaults.string(forKey: Preferences.iconOnDark)!)!
+            myIconOnDark.isTemplate = true
         } else {
             myIconOnDark = NSImage(named: "NoMAD-LogoAlternate-on")!
         }
         
         if defaults.string(forKey: Preferences.iconOffDark) != nil {
             myIconOffDark = NSImage.init(contentsOfFile: defaults.string(forKey: Preferences.iconOffDark)!)!
+            myIconOffDark.isTemplate = true
         } else {
             myIconOffDark = NSImage(named: "NoMAD-LogoAlternate-off")!
         }
